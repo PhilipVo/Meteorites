@@ -2,7 +2,11 @@ $(document).ready(function() {
 	$('.bttn').click(function() {
 		$.post('/events/'+$(this).attr('id'), function(res) {});
 		$(this).toggleClass("join going");
+		var id = 'count' + $(this).attr('id');
+		var count = parseInt($('#'+id).text());
+		$('#'+id).text($(this).text() == 'Join' ? count + 1: count - 1);		
 		$(this).text($(this).text() == 'Join' ? 'Going!' : 'Join');
+		return false;
 	});
 
 	$('form').submit(function() {

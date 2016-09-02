@@ -51,19 +51,19 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="/">Star events</a></li>
-					<li><a href="/users/edit">Profile</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu<span class="caret"></span></a>
-						<ul class="dropdown-menu">
+					<!-- <li><a href="/users/edit">Profile</a></li> -->
+					<!-- <li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu<span class="caret"></span></a> -->
+						<!-- <ul class="dropdown-menu">
 							<li><a href="/users/edit">Edit profile</a></li>
 							<li><a href="/users/show/{{session['user_id']}}">View messages</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a onclick="logout()" href="">Logout</a></li>
-						</ul>
-					</li>
+							<li><a href="/logout">Logout</a></li>
+						</ul> -->
+					<!-- </li> -->
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a onclick="logout()" href="">Logout</a></li>
+					<li><a href="/logout">Logout</a></li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
@@ -82,7 +82,7 @@
 		<div class="col-sm-6">
 			<h1>{{event.name}}</h1>
 
-			<table>
+			<table  style="font-size:20px;">
 				<tr>
 					<th>Date:</th>
 					<td style="padding-left:10px">{{event.date}}</td>
@@ -97,7 +97,7 @@
 				</tr>
 				<tr>
 					<th>Users joined:</th>
-					<td style="padding-left:10px">{{users|length}}</td>
+					<td id="count{{event.id}}" style="padding-left:10px">{{users|length}}</td>
 				</tr>
 			</table>
 			<h1>
@@ -107,8 +107,8 @@
 				<button id="{{event.id}}" class="btn bttn join">Join</button>
 			{% endif %}					
 			</h1>
-
 		</div>
+
 		<div class="col-sm-6 hidden-xs">
 			<h2>Meetup locations:</h2>
 				<!-- Google maps -->
@@ -204,8 +204,6 @@
 			{% endfor %}
 		</div>
 	</div> <!-- end of container -->
-
-
 
 </body>
 </html>
