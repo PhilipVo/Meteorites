@@ -6,10 +6,22 @@ $(document).ready(function() {
 	});
 
 	$('form').submit(function() {
-		console.log($(this).attr('action'))
-		$.post($(this).attr('action'), $(this).serialize(), function(res) {
-			$('#messages').html(res);
-		});
+		if ($(this).attr('submit') == 'message') 		
+			$.post($(this).attr('action'), $(this).serialize(), function(res) {
+				$('#messages').html(res);
+			});
+		else {
+			var id = $(this).prev().attr('id')
+			$.post($(this).attr('action'), $(this).serialize(), function(res) {
+				if (id)
+					$('#'+id).after(res);
+				else
+					$('.comments').before(res);
+				// else
+				// 	$().html(res);
+				$('textarea#com').val('');		
+			});			
+		}
 		return false;
 	});	
 

@@ -6,6 +6,16 @@ class Comment(Model):
 	def __init__(self):
 		super(Comment, self).__init__()
 
+	def get_comment(self, comment_id):
+		query = """SELECT *, comments.id AS id, comments.user_id AS user_id,
+							DATE_FORMAT(comments.created_at, '%M %D, %Y (%l:%i %p)') AS comment_date 
+							FROM comments LEFT JOIN messages ON message_id = messages.id
+							LEFT JOIN users ON comments.user_id = users.id WHERE comments.id = :comment_id
+							ORDER BY comments.created_at ASC
+						"""
+		data = {'comment_id': comment_id}
+		return self.db.query_db(query, data)[0]		
+
 	def get_event_comments(self, event_id):
 		query = """SELECT *, comments.id AS id, comments.user_id AS user_id,
 							DATE_FORMAT(comments.created_at, '%M %D, %Y (%l:%i %p)') AS comment_date 
@@ -24,7 +34,7 @@ class Comment(Model):
 							'message_id': message_id,
 							'comment': dat['comment']
 						}
-		self.db.query_db(query, data)
+		return self.db.query_db(query, data)
 
 	def delete_comment(self, id):
 		query = "DELETE FROM comments where id = :id"

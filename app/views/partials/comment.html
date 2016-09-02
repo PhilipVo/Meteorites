@@ -1,0 +1,12 @@
+{% if comment['user_id'] == session['user_id'] %}
+	<p style="display:inline-block"><b>{{comment['name']}}</b></p>
+{% else %}
+	<a style="display:inline-block" href="/users/show/{{comment['user_id']}}"><b>{{comment['name']}}</b></a>
+{% endif %}
+<p style="display:inline-block"> - {{comment['comment_date']}}</p>
+{% if comment['user_id'] == session['user_id'] %}
+	<form style="display:inline-block" class="pull-right" action="/comments/delete_comment/{{event.id}}/{{comment.id}}" method="POST">
+		<input class="delete_comment" type="submit" value="Delete Comment">
+	</form>
+{% endif %}								
+<p id="{{comment.id}}" class="comment">{{comment['comment']}}</p>

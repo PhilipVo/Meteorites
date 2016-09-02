@@ -1,5 +1,5 @@
 from __future__ import print_function
-import sys
+import sys, json
 from system.core.controller import *
 
 class Messages(Controller):
@@ -13,8 +13,6 @@ class Messages(Controller):
 
 	########## GET ##########
 	def get_messages_partial(self, event_id):
-		print('event_id', file=sys.stderr)
-		print(event_id, file=sys.stderr)
 		event = self.models['Event'].get_event(event_id, session['id'])
 		users = self.models['User'].get_event_users(event_id)
 		messages = self.models['Message'].get_event_messages(event_id)

@@ -15,5 +15,5 @@ routes['POST']['/register_user'] = 'Users#register_user'
 routes['POST']['/messages/post_message/<int:event_id>'] = 'Messages#post_message'
 routes['POST']['/messages/delete_message/<int:event_id>/<int:message_id>'] = 'Messages#delete_message'
 # Comments
-routes['POST']['/comments/post_comment/<int:event_id>/<int:message_id>'] = 'Comments#post_comment'
-routes['POST']['/comments/delete_comment/<int:event_id>/<int:comment_id>'] = 'Comments#delete_comment'
+routes['POST']['/comments/post_comment/<int:message_id>'] = 'Comments#post_comment'
+routes['POST']['/comments/delete_comment/<int:comment_id>'] = 'Comments#delete_comment'
