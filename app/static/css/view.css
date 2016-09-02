@@ -1,18 +1,19 @@
-/** {
+* {
 	color: white;
-}*/
-/*
-.item img {
-	height:300px; 
-	width:100%;
-}*/
-
-.panel-body {
-background: rgba(46, 51, 56, 0.2)!important;
 }
 
-.panel {
-	opacity: 0.8;
+.container {
+	background-color: #323232;
+	opacity: .85;
+	padding-bottom: 50px;
+}
+
+.container:hover {
+	opacity: .95;
+}
+
+textarea {
+	color: black!important;
 }
 
 button {
@@ -21,7 +22,8 @@ button {
 }
 
 .going {
-
+	background-color:white;	
+	color: black;
 }
 
 .join {
@@ -29,7 +31,57 @@ button {
 	color: white;
 }
 
-.container {
-	background: white;
-	opacity: .8;
+.messages, .comment {
+	overflow-y: auto;
+	width: 100%;
+}
+
+.messages {
+	height: 100px;
+}
+
+.comment {
+	margin-bottom: 50px;
+	/*height: 80px;*/
+}
+
+#com {
+	margin-bottom: 0px;
+}
+
+.delete_message {
+	color: red;
+	padding: 3px;
+	margin-bottom: 2px;
+	border: solid 1px red;
+	background-color: transparent;
+	font-size:11px;	
+	display: inline-block;
+}
+
+.delete_comment {
+	color: red;
+	padding: 3px;
+	margin-bottom: 2px;
+	border: solid 1px transparent;
+	background-color: transparent;
+	font-size:10px;	
+	display: inline-block;
+}
+
+#map {
+	height: 100%;
+}
+#floating-panel {
+	position: absolute;
+	top: 10px;
+	left: 25%;
+	z-index: 5;
+	background-color: #fff;
+	padding: 5px;
+	border: 1px solid #999;
+	text-align: center;
+	font-family: 'Roboto','sans-serif';
+	line-height: 30px;
+	padding-left: 10px;
 }

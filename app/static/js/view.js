@@ -1,9 +1,17 @@
 $(document).ready(function() {
-	$.backstretch(["/static/img/background.jpg", 
-		"https://upload.wikimedia.org/wikipedia/commons/6/6e/Veil_Nebula_-_NGC6960.jpg",
-		"https://upload.wikimedia.org/wikipedia/commons/d/d6/Hs-2009-25-e-full_jpg.jpg"],
-		{duration: 5000, fade: 2000});
-	$('.backstretch').css({"opacity":"0.8"})
+	$('.bttn').click(function() {
+		$.post('/events/'+$(this).attr('id'), function(res) {});
+		$(this).toggleClass("join going");
+		$(this).text($(this).text() == 'Join' ? 'Going!' : 'Join');
+	});
+
+	$('form').submit(function() {
+		console.log($(this).attr('action'))
+		$.post($(this).attr('action'), $(this).serialize(), function(res) {
+			$('#messages').html(res);
+		});
+		return false;
+	});	
 
 	$('.comments').hide();
 

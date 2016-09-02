@@ -8,6 +8,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="/static/css/stylesheet.css">
+	
 	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
 		
 	<!-- Latest compiled and minified CSS -->
@@ -23,6 +24,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
 	<script src="/static/js/background.js"></script>
 
+	<!-- Logout -->
+	<script src="/static/js/logout.js"></script>
+	
 	<script src="/static/js/main.js"></script>
 
 </head>
@@ -51,12 +55,12 @@
 							<li><a href="/users/edit">Edit profile</a></li>
 							<li><a href="/users/show/{{session['user_id']}}">View messages</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="/logout">Logout</a></li>
+							<li><a onclick="logout()" href="">Logout</a></li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/logout">Logout</a></li>
+					<li><a onclick="logout()" href="">Logout</a></li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
@@ -82,53 +86,29 @@
 				<tr>
 					<th>Meteor</th>	
 					<th>Date</th>	
-					<th>Diameter (km)</th>	
-					<th>Distance (km)</th>	
+					<th class="hidden-xs">Diameter (meters)</th>	
+					<th class="hidden-xs">Distance (miles)</th>	
+					<th class="hidden-xs">Users going</th>	
 					<th>Joining?</th>	
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td><a href="/view/1">Meteor 1</a></td>
-					<td>September 1, 2016</td>					
-					<td>10</td>					
-					<td>1000</td>					
-					<td><button id="1" class="btn going">Going!</button></td>					
-				</tr>						
-				<tr>
-					<td><a href="/view/2">Meteor 2</a></td>
-					<td>September 1, 2016</td>					
-					<td>10</td>					
-					<td>1000</td>					
-					<td><button id="2" class="btn join">Join</button></td>					
-				</tr>			
-				<tr>
-					<td><a href="/view/3">Meteor 3</a></td>
-					<td>September 1, 2016</td>					
-					<td>10</td>					
-					<td>1000</td>					
-					<td><button id="3" class="btn join">Join</button></td>					
-				</tr>			
-				<tr>
-					<td><a href="/view/4">Meteor 4</a></td>
-					<td>September 1, 2016</td>					
-					<td>10</td>					
-					<td>1000</td>					
-					<td><button id="4" class="btn going">Going!</button></td>					
-				</tr>															
-				{% for user in users %}
-					{% if user['id'] != session['user_id'] %}
-						<tr>
-							<td>{{user['id']}}</td>
-							<td><a href="/users/show/{{user['id']}}">
-									{{user['first_name']}} {{user['last_name']}}
-								</a>
-							</td>							<td>{{user['email']}}</td>
-							<td>{{user['user_date']}}</td>
-							<td>{{user['level']}}</td>
-						</tr>
-					{% endif %}
-				{% endfor %}
+				{% for event in events %}
+					<tr>
+						<td><a href="/events/view/{{event.id}}">{{event.name}}</a></td>
+						<td>{{event.date}}</td>					
+						<td class="hidden-xs">{{event.diameter}}</td>					
+						<td class="hidden-xs">{{event.distance}}</td>					
+						<td class="hidden-xs">{{event.count}}</td>					
+						<td>
+							{% if event.joined == 1 %}
+								<button id="{{event.id}}" class="btn going">Going!</button>
+							{% else %}
+								<button id="{{event.id}}" class="btn join">Join</button>
+							{% endif %}
+						</td>					
+					</tr>
+				{% endfor %}										
 			</tbody>
 			</table>
 		</div>

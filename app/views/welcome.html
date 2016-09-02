@@ -7,6 +7,8 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
+	<link rel="stylesheet" type="text/css" href="/static/css/stylesheet.css">
+
 	<link rel="stylesheet" type="text/css" href="/static/css/welcome.css">
 		
 	<!-- Latest compiled and minified CSS -->
@@ -116,37 +118,21 @@
 			</div>
 			<br>
 
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">2015 meteor1</h3>
+			{% for i in range(3) %}
+				{% set event = events[i] %}
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<b class="panel-title">{{event.name}} (Closest on: {{event.date}})</b>
+					</div>
+					<div class="panel-body">
+						<p>Diameter: {{event.diameter}} meters</p>
+						<p>Distance: {{event.distance}} miles</p>
+						<p>{{event.count}} people going! 
+					</div>
 				</div>
-				<div class="panel-body">
-					<p>Distance: 500km</p>
-					<p>Visibility: High</p>
+				{% set i = i + 1 %}
+			{% endfor %}
 
-					<p>5 people are going. Join now!</p>
-				</div>
-			</div>
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">2016 meteor2</h3>
-				</div>
-				<div class="panel-body">
-					Distance: 500km
-					Visibility: High
-				</div>
-			</div>
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">2014 asteroid</h3>
-				</div>
-				<div class="panel-body">
-					Distance: 500km
-					Visibility: High
-				</div>
-			</div><!-- Carousel end -->
 		</div> 
 
 
@@ -157,19 +143,20 @@
 			<hr>
 			<p>Login to join other stargazers:</p>
 			<!-- Facebook login -->
+			<!-- <button onclick="login()">Facebooklogin</button> -->
 			<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 			<div id="status">
 			</div>
 			<!-- Gmail login -->
-			<div id="authorize-div" style="display: none">
+<!-- 			<div id="authorize-div" style="display: none">
 				<span>Authorize access to Gmail API</span>
-				<!--Button for the user to click to initiate auth sequence -->
+				Button for the user to click to initiate auth sequence 
 				<button id="authorize-button" onclick="handleAuthClick(event)">
 					Authorize
 				</button>
 			</div>
 			<pre id="output"></pre>
-
+ -->
 		</div>
 
 		<!-- Welcome page -->

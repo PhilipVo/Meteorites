@@ -6,16 +6,16 @@ class Users(Controller):
 	def __init__(self, action):
 		super(Users, self).__init__(action)
 		self.load_model('User')
+		self.load_model('Event')
 		self.db = self._app.db
 
 	########## GET ##########
 	def index(self):
+		events = self.models['Event'].get_events(0)
 		if session.get('id'):
-			return self.load_view('main.html')
-		return self.load_view('welcome.html')
-
-	def main(self):
-		return self.load_view('main.html')
+			events = self.models['Event'].get_events(session['id'])
+			return self.load_view('main.html', events=events)
+		return self.load_view('welcome.html', events=events)
 
 	def dashboard(self):
 		if session.get('id'):
@@ -24,7 +24,7 @@ class Users(Controller):
 
 	def logout(self):
 		session.clear()
-		return redirect('/')				
+		return redirect('/')
 
 	########## POST ##########      
 	def login_user(self):
