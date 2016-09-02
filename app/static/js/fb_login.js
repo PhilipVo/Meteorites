@@ -50,9 +50,20 @@ window.fbAsyncInit = function() {
 	//    your app or not.
 	//
 	// These three cases are handled in the callback function.
-
 	FB.getLoginStatus(function(response) {
+		FB.api("/me/permissions", "delete", function(response){ 
+		});		
+		FB.logout(function(response) {
+			console.log("RESPONSE IS")
+			console.log(response)
+			  FB.Auth.setAuthResponse(null, 'unknown');
 		statusChangeCallback(response);
+
+				// FB.Auth.setAuthResponse(null, 'unknown');
+
+				// this part just clears the $_SESSION var
+				// replace with your own code
+			});	
 	});
 
 };

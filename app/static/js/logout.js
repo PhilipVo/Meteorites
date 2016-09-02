@@ -1,14 +1,20 @@
 function logout() {
 	FB.getLoginStatus(function(response) {
-			FB.logout(function(response) {
+		FB.api("/me/permissions", "delete", function(response){ 
+			  FB.Auth.setAuthResponse(null, 'unknown');
+
+		});
+		FB.logout(function(response) {
+			  FB.Auth.setAuthResponse(null, 'unknown');
+
 				// FB.Auth.setAuthResponse(null, 'unknown');
 
 				// this part just clears the $_SESSION var
 				// replace with your own code
-				$.get("/logout", function(response) {});
-			});
+			});	
 	});
 
+	$.get("/logout", function(response) {});
 };
 
 window.fbAsyncInit = function() {
